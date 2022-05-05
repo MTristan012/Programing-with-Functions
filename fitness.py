@@ -10,12 +10,24 @@ from datetime import datetime
 
 def main():
     # Get the user's gender, birthdate, height, and weight.
-
+    gender = input("Please enter your gender(M or F): ").upper()
+    birth_str = input("Enter your birthdate(YYYY-MM-DD): ").upper()
+    pounds = float(input("Enter your weight in U.S. pounds: "))
+    inches = float(input("Enter your height in U.S. inches: "))
     # Call the compute_age, kg_from_lb, cm_from_in,
     # body_mass_index, and basal_metabolic_rate functions
     # as needed.
-
+    age = compute_age(birth_str)
+    weight = kg_from_lb(pounds)
+    height = cm_from_in(inches)
+    bmi = body_mass_index(weight, height)
+    bmr = basal_metabolic_rate(gender, weight, height, age)
     # Print the results for the user to see.
+    print(f"Age(years): {age}")
+    print(f"Weight(kg): {weight:.2f}")
+    print(f"Height(cm): {height:.1f}")
+    print(f"Body mass index: {bmi:.1f}")
+    print(f"Basal metabolic rate(kcal/day): {bmr:.0f}")
     pass
 
 
@@ -48,7 +60,8 @@ def kg_from_lb(pounds):
     Parameter pounds: a mass in U.S. pounds.
     Return: the mass in kilograms.
     """
-    return
+    weight = pounds/2.2046
+    return weight
 
 
 def cm_from_in(inches):
@@ -56,7 +69,8 @@ def cm_from_in(inches):
     Parameter inches: a length in inches.
     Return: the length in centimeters.
     """
-    return
+    length = inches * 2.54
+    return length
 
 
 def body_mass_index(weight, height):
@@ -66,7 +80,9 @@ def body_mass_index(weight, height):
         height: a person's height in centimeters.
     Return: a person's body mass index.
     """
-    return
+    bmi = (10000*weight)/(height**2)
+
+    return bmi
 
 
 def basal_metabolic_rate(gender, weight, height, age):
@@ -77,7 +93,11 @@ def basal_metabolic_rate(gender, weight, height, age):
         age: a person's age in years.
     Return: a person's basal metabolic rate in kcals per day.
     """
-    return
+    if gender == "F":
+        bmr = 447.593 + (9.247*weight) + (3.098*height) - (4.330*age)
+    elif gender == "M":
+        bmr = 88.362 + (13.397*weight) + (4.799*height) - (5.677*age)
+    return bmr
 
 
 # Call the main function so that
