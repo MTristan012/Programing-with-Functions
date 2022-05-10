@@ -39,7 +39,7 @@ def main():
     print(f"Volume: {vol:.1f}")
 
 
-def cone_volume(radius,height):
+def cone_volume(radius, height):
     """Compute and return the volume of a right circular cone."""
     volume = math.pi * radius**2 * height / 3
     return volume
